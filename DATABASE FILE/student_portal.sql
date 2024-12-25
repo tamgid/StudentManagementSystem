@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 25, 2024 at 12:28 AM
+-- Generation Time: Dec 25, 2024 at 06:18 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -40,7 +40,8 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`id`, `firstName`, `lastName`, `emailAddress`, `password`) VALUES
-(1, 'Fahmid', 'Ahmed', 'admin@gmail.com', 'admin');
+(1, 'Fahmid', 'Ahmed', 'admin@gmail.com', 'admin'),
+(2, 'Shadakur', 'Tamgid', 'tamgid311@gmail.com', 'tamgid');
 
 -- --------------------------------------------------------
 
@@ -60,7 +61,8 @@ CREATE TABLE `certificate` (
 --
 
 INSERT INTO `certificate` (`id`, `studentId`, `semesterName`, `fileUrl`) VALUES
-(1, '11223344', 'Spring-2023', '../Admin/uploads/676b0db1a64734.88091285.pdf');
+(1, '11223344', 'Spring-2023', '../Admin/uploads/676b0db1a64734.88091285.pdf'),
+(3, '11223344', 'Summer-2023', '../Admin/uploads/676c3614e63f15.02986569.pdf');
 
 -- --------------------------------------------------------
 
@@ -142,6 +144,25 @@ CREATE TABLE `education` (
 INSERT INTO `education` (`id`, `degree`, `degreeName`, `institution`, `universityBoard`, `passingYear`, `gradeClassDivision`, `marksCGPA`, `remarks`, `studentId`) VALUES
 (4, 'HSC', 'Commerce', 'Dhaka Commerce College', 'Dhaka', '2018', 'B', '3.42', 'None', '11223344'),
 (5, 'SSC', 'Science', 'Model Academy', 'Dhaka', '2016', 'A', '4.62', 'Good', '11223344');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `forgot_password`
+--
+
+CREATE TABLE `forgot_password` (
+  `id` int(11) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `applicationDate` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `forgot_password`
+--
+
+INSERT INTO `forgot_password` (`id`, `email`, `applicationDate`) VALUES
+(6, 'tamgid311@gmail.com', '2024-12-25');
 
 -- --------------------------------------------------------
 
@@ -330,6 +351,12 @@ ALTER TABLE `education`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `forgot_password`
+--
+ALTER TABLE `forgot_password`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `payment`
 --
 ALTER TABLE `payment`
@@ -355,13 +382,13 @@ ALTER TABLE `student`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `certificate`
 --
 ALTER TABLE `certificate`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `convocation`
@@ -380,6 +407,12 @@ ALTER TABLE `course`
 --
 ALTER TABLE `education`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `forgot_password`
+--
+ALTER TABLE `forgot_password`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `payment`
