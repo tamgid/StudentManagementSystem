@@ -315,7 +315,8 @@ session_start();
           <!-- Forgot Password Section -->
           <div class="text-center mt-3">
             <span>Forgot your password? </span>
-            <a href="#" style="color: #054D95; text-decoration: none;" onmouseover="this.style.color='#348681'" onmouseout="this.style.color='#054D95'">Check Details</a>
+            <a href="forgot_password.php" style="color: #054D95; text-decoration: none;"
+              onmouseover="this.style.color='#348681'" onmouseout="this.style.color='#054D95'">Check Details</a>
           </div>
         </div>
       </div>
