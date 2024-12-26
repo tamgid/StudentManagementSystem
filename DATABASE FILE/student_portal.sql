@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 25, 2024 at 06:18 PM
+-- Generation Time: Dec 26, 2024 at 11:39 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -40,8 +40,7 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`id`, `firstName`, `lastName`, `emailAddress`, `password`) VALUES
-(1, 'Fahmid', 'Ahmed', 'admin@gmail.com', 'admin'),
-(2, 'Shadakur', 'Tamgid', 'tamgid311@gmail.com', 'tamgid');
+(1, 'Fahmid', 'Ahmed', 'admin@gmail.com', 'admin');
 
 -- --------------------------------------------------------
 
@@ -61,8 +60,7 @@ CREATE TABLE `certificate` (
 --
 
 INSERT INTO `certificate` (`id`, `studentId`, `semesterName`, `fileUrl`) VALUES
-(1, '11223344', 'Spring-2023', '../Admin/uploads/676b0db1a64734.88091285.pdf'),
-(3, '11223344', 'Summer-2023', '../Admin/uploads/676c3614e63f15.02986569.pdf');
+(7, '11223344', 'Spring-2023', '../Admin/uploads/676d2ef7c16794.26527178.pdf');
 
 -- --------------------------------------------------------
 
@@ -81,13 +79,6 @@ CREATE TABLE `convocation` (
   `department` varchar(100) NOT NULL,
   `programName` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `convocation`
---
-
-INSERT INTO `convocation` (`id`, `studentId`, `studentName`, `email`, `dob`, `fatherName`, `motherName`, `department`, `programName`) VALUES
-(2, '11223344', 'Shadakur Rahmen Tamjid', 'student@gmail.com', '2001-01-08', 'Md. Ratull', 'Ramisaa', 'Computer Science and Engineering', 'B.Sc');
 
 -- --------------------------------------------------------
 
@@ -156,13 +147,6 @@ CREATE TABLE `forgot_password` (
   `email` varchar(50) NOT NULL,
   `applicationDate` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `forgot_password`
---
-
-INSERT INTO `forgot_password` (`id`, `email`, `applicationDate`) VALUES
-(6, 'tamgid311@gmail.com', '2024-12-25');
 
 -- --------------------------------------------------------
 
@@ -314,7 +298,7 @@ CREATE TABLE `student` (
 --
 
 INSERT INTO `student` (`id`, `studentId`, `studentPassword`, `firstName`, `middleName`, `lastName`, `nickName`, `dob`, `birthPlace`, `gender`, `maritalStatus`, `bloodGroup`, `religion`, `nationality`, `nationalId`, `passportNo`, `socialNetworkId`, `IM`, `aboutStudent`, `mobileNo`, `presentMobile`, `permanentMobile`, `email`, `alternativeEmail`, `imageUrl`, `presentAddress`, `presentPostOffice`, `presentPoliceStation`, `presentDistrictCity`, `presentDivisionState`, `presentCountry`, `presentZipCode`, `permanentAddress`, `permanentPostOffice`, `permanentPoliceStation`, `permanentDistrictCity`, `permanentDivisionState`, `permanentCountry`, `permanentZipCode`, `hostelAddress`, `messAddress`, `otherAddress`, `fatherName`, `fatherContactNo`, `fatherOccupation`, `fatherDesignation`, `fatherEmployerName`, `fatherAnnualIncome`, `motherName`, `motherContactNo`, `motherOccupation`, `motherDesignation`, `motherEmployerName`, `motherAnnualIncome`, `parentAddress`, `localGuardianName`, `localGuardianContactNo`, `relationWithLocalGuardian`, `localGuardianAddress`) VALUES
-(23, '11223344', 'cd73502828457d15655bbd7a63fb0bc8', 'Shadakur', 'Rahmen', 'Tamjid', 'Nehall', '2001-01-08', 'Chakaria', 'Male', 'Single', 'O+', 'Islam', 'Bangladeshii', '987654321', '87654321', '9876543', '675786788', 'Fahmid Ahmed is a student of Department of Computer Science and Engineering of North Pacific International University of Bangladesh. He is a highly motivated and dedicated student pursuing a Bachelor of Science in Computer Science. Known for his exceptional problem-solving skills and a strong passion for technology, John has consistently excelled in both academics and extracurricular activities.\r\n\r\nHe is an active participant in coding competitions and has successfully developed several innovative projects, including a mobile app for task management and a web-based platform for online tutoring. John is also a member of the university\'s robotics club, where he collaborates with peers to design and program robots for national competitions.\r\n\r\nBeyond academics, John enjoys playing chess, volunteering at local community centers, and exploring the latest trends in artificial intelligence and machine learning. His goal is to leverage his skills and knowledge to create impactful technological solutions that address real-world challenges.', '01825859931', '01827859991', '01571000925', 'tamgid311@gmail.com', 'satro@gmail.com', 'student.jpg', 'Chawkbazarr', 'Chittagongg', 'Chawkbazarr', 'Chittagongg', 'Dhakaa', 'Bangladeshh', '42034', 'sfsdfsdfsf', 'fdsdfdsfss', 'fsdfdsfdsfs', 'sfsdfdsfdsf', 'sgdfdgdf', 'sfewrewrf', '3545', '1no gatee', 'chittagong university rd', 'Chittagonggh', 'Md. Ratull', '01987876755', 'Teacherr', 'Professorr', 'Ratull', '10000008', 'Ramisaa', '01978786753', 'Housewifee', 'Nonee', 'Ramisaa', '1000003', '1no gatee', 'Ramimm', '01964567887', 'Unclee', '1no gatess');
+(42, '11223344', 'cd73502828457d15655bbd7a63fb0bc8', 'Fahmid', 'Fahmid', 'Fahmid', 'Fahmid', '2005-10-26', 'Dhaka', 'Male', 'Single', 'A-', 'Islam', 'Bangladeshi', '111', '222', '333', '444', 'I am a student of CSE of NPIUB', '01923453434', '01923453435', '01923453438', 'student@gmail.com', 'student1@gmail.com', '../Admin/uploads/676d2eaeb73946.44740682.jpg', 'Dhaka', 'Dhaka', 'Dhaka', 'Dhaka', 'Dhaka', 'BD', '123', 'Chittagong', 'Chittagong', 'Chittagong', 'Chittagong', 'Chittagong', 'BD', '123', 'Chittagong', 'Chittagong', 'Chittagong', 'Daniel', '01945342342', 'Daniel', 'Daniel', 'Daniel', '1234', 'Elma', '01823989898', 'Elma', 'Elma', 'Elma', '456', 'Chittagong', 'Eba', '01934787678', 'Sis', 'Chittagong');
 
 --
 -- Indexes for dumped tables
@@ -388,7 +372,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `certificate`
 --
 ALTER TABLE `certificate`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `convocation`
@@ -400,13 +384,13 @@ ALTER TABLE `convocation`
 -- AUTO_INCREMENT for table `course`
 --
 ALTER TABLE `course`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `education`
 --
 ALTER TABLE `education`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `forgot_password`
@@ -418,19 +402,19 @@ ALTER TABLE `forgot_password`
 -- AUTO_INCREMENT for table `payment`
 --
 ALTER TABLE `payment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `semester_course`
 --
 ALTER TABLE `semester_course`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `student`
 --
 ALTER TABLE `student`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
