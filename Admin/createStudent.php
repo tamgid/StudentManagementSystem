@@ -3,12 +3,9 @@ error_reporting(0);
 include '../Includes/dbcon.php';
 include '../Includes/session.php';
 
-$statusMsg = "";
-
-//------------------------SAVE STUDENT--------------------------------------------------
+//------------------------SAVE--------------------------------------------------
 
 if (isset($_POST['save'])) {
-  // Collect data from form
   $studentId = $_POST['studentId'];
   $studentPassword = $_POST['studentPassword'];
   $firstName = $_POST['firstName'];
@@ -32,7 +29,6 @@ if (isset($_POST['save'])) {
   $permanentMobile = $_POST['permanentMobile'];
   $email = $_POST['email'];
   $alternativeEmail = $_POST['alternativeEmail'];
-  $imageUrl = $_POST['imageUrl'];
   $presentAddress = $_POST['presentAddress'];
   $presentPostOffice = $_POST['presentPostOffice'];
   $presentPoliceStation = $_POST['presentPoliceStation'];
@@ -68,20 +64,53 @@ if (isset($_POST['save'])) {
   $relationWithLocalGuardian = $_POST['relationWithLocalGuardian'];
   $localGuardianAddress = $_POST['localGuardianAddress'];
 
+
   // Hash the password using MD5
   $hashedPassword = md5($studentPassword);
 
-  // Insert data into the student table
-  $query = mysqli_query($conn, "INSERT INTO student (studentId, studentPassword, firstName, middleName, lastName, nickName, dob, birthPlace, gender, maritalStatus, bloodGroup, religion, nationality, nationalId, passportNo, socialNetworkId, IM, aboutStudent, mobileNo, presentMobile, permanentMobile, email, alternativeEmail, imageUrl, presentAddress, presentPostOffice, presentPoliceStation, presentDistrictCity, presentDivisionState, presentCountry, presentZipCode, permanentAddress, permanentPostOffice, permanentPoliceStation, permanentDistrictCity, permanentDivisionState, permanentCountry, permanentZipCode, hostelAddress, messAddress, otherAddress, fatherName, fatherContactNo, fatherOccupation, fatherDesignation, fatherEmployerName, fatherAnnualIncome, motherName, motherContactNo, motherOccupation, motherDesignation, motherEmployerName, motherAnnualIncome, parentAddress, localGuardianName, localGuardianContactNo, relationWithLocalGuardian, localGuardianAddress) 
-    VALUES ('$studentId', '$hashedPassword', '$firstName', '$middleName', '$lastName', '$nickName', '$dob', '$birthPlace', '$gender', '$maritalStatus', '$bloodGroup', '$religion', '$nationality', '$nationalId', '$passportNo', '$socialNetworkId', '$IM', '$aboutStudent', '$mobileNo', '$presentMobile', '$permanentMobile', '$email', '$alternativeEmail', '$imageUrl', '$presentAddress', '$presentPostOffice', '$presentPoliceStation', '$presentDistrictCity', '$presentDivisionState', '$presentCountry', '$presentZipCode', '$permanentAddress', '$permanentPostOffice', '$permanentPoliceStation', '$permanentDistrictCity', '$permanentDivisionState', '$permanentCountry', '$permanentZipCode', '$hostelAddress', '$messAddress', '$otherAddress', '$fatherName', '$fatherContactNo', '$fatherOccupation', '$fatherDesignation', '$fatherEmployerName', '$fatherAnnualIncome', '$motherName', '$motherContactNo', '$motherOccupation', '$motherDesignation', '$motherEmployerName', '$motherAnnualIncome', '$parentAddress', '$localGuardianName', '$localGuardianContactNo', '$relationWithLocalGuardian', '$localGuardianAddress')");
+  // File upload handling
+  $file = $_FILES['fileUrl'];
+  $fileName = $file['name'];
+  $fileTmpName = $file['tmp_name'];
+  $fileSize = $file['size'];
+  $fileError = $file['error'];
+  $fileType = $file['type'];
 
-  if ($query) {
-    echo "<script type='text/javascript'>
-            alert('Education Details Added Successfully!');
-            window.location = ('createStudent.php');
-          </script>";
+  // Allow only PDF files
+  $fileExt = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+  $allowed = ['jpg', 'jpeg', 'png'];
+
+  if (in_array($fileExt, $allowed)) {
+    if ($fileError === 0) {
+      if ($fileSize <= 20000000) { // Limit file size to 2MB
+        $newFileName = uniqid('', true) . '.' . $fileExt; // Unique file name
+        $fileDestination = '../Admin/uploads/' . $newFileName; // Upload directory
+
+        // Move file to destination folder
+        if (move_uploaded_file($fileTmpName, $fileDestination)) {
+          // Insert data into the student table
+          $query = mysqli_query($conn, "INSERT INTO student (studentId, studentPassword, firstName, middleName, lastName, nickName, dob, birthPlace, gender, maritalStatus, bloodGroup, religion, nationality, nationalId, passportNo, socialNetworkId, IM, aboutStudent, mobileNo, presentMobile, permanentMobile, email, alternativeEmail, imageUrl, presentAddress, presentPostOffice, presentPoliceStation, presentDistrictCity, presentDivisionState, presentCountry, presentZipCode, permanentAddress, permanentPostOffice, permanentPoliceStation, permanentDistrictCity, permanentDivisionState, permanentCountry, permanentZipCode, hostelAddress, messAddress, otherAddress, fatherName, fatherContactNo, fatherOccupation, fatherDesignation, fatherEmployerName, fatherAnnualIncome, motherName, motherContactNo, motherOccupation, motherDesignation, motherEmployerName, motherAnnualIncome, parentAddress, localGuardianName, localGuardianContactNo, relationWithLocalGuardian, localGuardianAddress) 
+  VALUES ('$studentId', '$hashedPassword', '$firstName', '$middleName', '$lastName', '$nickName', '$dob', '$birthPlace', '$gender', '$maritalStatus', '$bloodGroup', '$religion', '$nationality', '$nationalId', '$passportNo', '$socialNetworkId', '$IM', '$aboutStudent', '$mobileNo', '$presentMobile', '$permanentMobile', '$email', '$alternativeEmail', '$fileDestination', '$presentAddress', '$presentPostOffice', '$presentPoliceStation', '$presentDistrictCity', '$presentDivisionState', '$presentCountry', '$presentZipCode', '$permanentAddress', '$permanentPostOffice', '$permanentPoliceStation', '$permanentDistrictCity', '$permanentDivisionState', '$permanentCountry', '$permanentZipCode', '$hostelAddress', '$messAddress', '$otherAddress', '$fatherName', '$fatherContactNo', '$fatherOccupation', '$fatherDesignation', '$fatherEmployerName', '$fatherAnnualIncome', '$motherName', '$motherContactNo', '$motherOccupation', '$motherDesignation', '$motherEmployerName', '$motherAnnualIncome', '$parentAddress', '$localGuardianName', '$localGuardianContactNo', '$relationWithLocalGuardian', '$localGuardianAddress')");
+
+          if ($query) {
+            echo "<script type='text/javascript'>
+          alert('Education Details Added Successfully!');
+          window.location = ('createStudent.php');
+        </script>";
+          } else {
+            $statusMsg = "<div class='alert alert-danger' style='margin-right:700px;'>An error Occurred!</div>";
+          }
+        } else {
+          $statusMsg = "<div class='alert alert-danger' style='margin-right:700px;'>Failed to upload the file!</div>";
+        }
+      } else {
+        $statusMsg = "<div class='alert alert-danger' style='margin-right:700px;'>File size exceeds the limit of 2MB!</div>";
+      }
+    } else {
+      $statusMsg = "<div class='alert alert-danger' style='margin-right:700px;'>An error occurred while uploading the file!</div>";
+    }
   } else {
-    $statusMsg = "<div class='alert alert-danger' style='margin-right:700px;'>An error Occurred!</div>";
+    $statusMsg = "<div class='alert alert-danger' style='margin-right:700px;'>Only PDF files are allowed!</div>";
   }
 }
 ?>
@@ -94,7 +123,7 @@ if (isset($_POST['save'])) {
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link href="img/logo.jpg" rel="icon">
-  <title>Add Student</title>
+  <title>Upload Certificate</title>
   <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
   <link href="css/ruang-admin.min.css" rel="stylesheet">
@@ -114,17 +143,23 @@ if (isset($_POST['save'])) {
         <!-- Container Fluid-->
         <div class="container-fluid" id="container-wrapper">
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h4 class="mb-0 text-black">Add Student Details</h4>
+            <h1 class="h4 mb-0 text-gray-800">Upload Certificate</h1>
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="./">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Upload Certificate</li>
+            </ol>
           </div>
 
           <div class="row">
             <div class="col-lg-12">
+              <!-- Form Basic -->
               <div class="card mb-4">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h6 class="m-0 font-weight-bold text-primary">Certificate Upload</h6>
                   <?php echo $statusMsg; ?>
                 </div>
                 <div class="card-body">
-                  <form method="post">
+                  <form method="post" enctype="multipart/form-data">
                     <!-- Personal Information -->
                     <h6 class="text-primary text-center mb-4">Personal Information</h6>
                     <div class="form-group row">
@@ -252,15 +287,10 @@ if (isset($_POST['save'])) {
                         <input type="email" class="form-control" name="alternativeEmail">
                       </div>
                     </div>
-
-                    <!-- Image Upload -->
-                    <div class="form-group row">
-                      <div class="col-md-4">
-                        <label style="font-size: 0.9rem;">Image URL</label>
-                        <input type="text" class="form-control" name="imageUrl">
-                      </div>
+                    <div class="form-group">
+                      <label class="form-control-label">Upload Student Image<span class="text-danger ml-2">*</span></label>
+                      <input type="file" class="form-control" name="fileUrl" accept=".jpg,.jpeg,.png" required>
                     </div>
-
                     <!-- About Student -->
                     <h6 class="text-primary mt-4 text-center mb-4">About the Student</h6>
                     <div class="form-group">
@@ -460,19 +490,19 @@ if (isset($_POST['save'])) {
                         <input type="text" class="form-control" name="localGuardianAddress">
                       </div>
                     </div>
-
-                    <!-- Add fields here for all the remaining attributes -->
-                    <button type="submit" name="save" class="btn btn-primary">Save</button>
+                    <button type="submit" name="save" class="btn btn-primary">Upload</button>
                   </form>
                 </div>
               </div>
             </div>
           </div>
+          <!--Row-->
         </div>
+        <!---Container Fluid-->
       </div>
-
       <!-- Footer -->
-      <?php include 'Includes/footer.php'; ?>
+      <?php include "Includes/footer.php"; ?>
+      <!-- Footer -->
     </div>
   </div>
 

@@ -2,7 +2,21 @@
 error_reporting(0);
 include '../Includes/dbcon.php';
 include '../Includes/session.php';
+// Fetch all student information using studentId from session
+$studentId = $_SESSION['studentId'];
+$query_student_details = "
+    SELECT * 
+    FROM student
+    WHERE studentId = '$studentId'
+";
+$rs_student_details = $conn->query($query_student_details);
 
+if ($rs_student_details->num_rows > 0) {
+    $student = $rs_student_details->fetch_assoc();
+} else {
+    echo "<p class='text-danger'>Student details not found.</p>";
+    exit;
+}
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $studentId = $_POST['studentId'];
 

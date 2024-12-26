@@ -4,21 +4,22 @@ include 'Includes/dbcon.php';
 $successMessage = ''; // Variable to hold the success message
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $email = $_POST['email'];
-    $applicationDate = date('Y-m-d'); // Current date
+  $email = $_POST['email'];
+  $applicationDate = date('Y-m-d'); // Current date
 
-    // Insert email and application date into the forgot_password table
-    $query = "INSERT INTO forgot_password (email, applicationDate) VALUES ('$email', '$applicationDate')";
-    if ($conn->query($query)) {
-        $successMessage = "Your request is received by the administrative panel. They will notify you regarding the password change.";
-    } else {
-        echo "<script>alert('Error submitting your request. Please try again later.');</script>";
-    }
+  // Insert email and application date into the forgot_password table
+  $query = "INSERT INTO forgot_password (email, applicationDate) VALUES ('$email', '$applicationDate')";
+  if ($conn->query($query)) {
+    $successMessage = "Your request is received by the administrative panel. They will notify you regarding the password change.";
+  } else {
+    echo "<script>alert('Error submitting your request. Please try again later.');</script>";
+  }
 }
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -34,6 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       height: 100vh;
       margin: 0;
     }
+
     .forgot-password-container {
       width: 100%;
       max-width: 400px;
@@ -43,13 +45,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       position: relative;
     }
+
     .btn {
       background-color: #054D95;
       color: white;
     }
+
     .btn:hover {
       background-color: #348681;
     }
+
     .back-button {
       position: absolute;
       top: 10px;
@@ -58,9 +63,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       text-decoration: none;
       font-weight: bold;
     }
+
     .back-button:hover {
       color: #054D95;
     }
+
     .success-message {
       color: #348681;
       font-size: 14px;
@@ -69,6 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
   </style>
 </head>
+
 <body>
   <div class="forgot-password-container">
     <a href="index.php" class="back-button">&larr; Back</a>
@@ -91,7 +99,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   <script>
     // Hide the success message after 5 seconds
-    window.onload = function () {
+    window.onload = function() {
       const successMessage = document.getElementById('successMessage');
       if (successMessage) {
         setTimeout(() => {
@@ -101,4 +109,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     };
   </script>
 </body>
+
 </html>

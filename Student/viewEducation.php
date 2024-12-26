@@ -13,6 +13,21 @@ FROM education
 WHERE studentId = '$studentId'
 ";
 $rs_education = $conn->query($query_education);
+// Fetch all student information using studentId from session
+$studentId = $_SESSION['studentId'];
+$query_student_details = "
+    SELECT * 
+    FROM student
+    WHERE studentId = '$studentId'
+";
+$rs_student_details = $conn->query($query_student_details);
+
+if ($rs_student_details->num_rows > 0) {
+    $student = $rs_student_details->fetch_assoc();
+} else {
+    echo "<p class='text-danger'>Student details not found.</p>";
+    exit;
+}
 ?>
 
 <!DOCTYPE html>

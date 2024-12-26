@@ -100,7 +100,7 @@ if ($rs_student_details->num_rows > 0) {
         <div class="w-100 mx-auto">
           <div class="text-white p-4 d-flex align-items-center" style="background-color: #6dbaa0; min-height: 200px;">
             <div class="ml-3 mt-2 mb-2 mr-3">
-              <img src="<?php echo htmlspecialchars('./img/' . ($student['imageUrl'] ?: 'default-profile.png')); ?>"
+              <img src="<?php echo htmlspecialchars($student['imageUrl']); ?>"
                 alt="Student"
                 class="rounded-circle img-fluid"
                 style="width: 170px; height: 170px; object-fit: cover;"

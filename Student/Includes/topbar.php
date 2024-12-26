@@ -40,7 +40,7 @@ $imageUrl = $rows['imageUrl'];
       <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
         aria-haspopup="true" aria-expanded="false">
         <!-- Display user image -->
-        <img src="<?php echo htmlspecialchars('./img/' . ($imageUrl ?: 'default-profile.png')); ?>"
+        <img src="<?php echo htmlspecialchars($student['imageUrl']); ?>"
           alt="Profile Picture"
           class="img-profile rounded-circle"
           style="width: 40px; height: 40px; object-fit: cover;">

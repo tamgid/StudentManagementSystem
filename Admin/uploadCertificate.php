@@ -23,7 +23,7 @@ if (isset($_POST['save'])) {
 
     if (in_array($fileExt, $allowed)) {
         if ($fileError === 0) {
-            if ($fileSize <= 2000000) { // Limit file size to 2MB
+            if ($fileSize <= 20000000) { // Limit file size to 2MB
                 $newFileName = uniqid('', true) . '.' . $fileExt; // Unique file name
                 $fileDestination = '../Admin/uploads/' . $newFileName; // Upload directory
 
@@ -118,6 +118,10 @@ if (isset($_POST['save'])) {
                                                     <option value="Spring-2024">Spring-2024</option>
                                                     <option value="Summer-2024">Summer-2024</option>
                                                     <option value="Fall-2024">Fall-2024</option>
+                                                    <option value="Winter-2024">Winter-2025</option>
+                                                    <option value="Spring-2024">Spring-2025</option>
+                                                    <option value="Summer-2024">Summer-2025</option>
+                                                    <option value="Fall-2024">Fall-2025</option>
                                                 </select>
                                             </div>
                                         </div>
